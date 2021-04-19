@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 export default function Task({ task: { id, title, state }, onArchiveTask, onPinTask }) {
   return (
     <div className={`list-item ${state}`}>
@@ -26,18 +27,20 @@ export default function Task({ task: { id, title, state }, onArchiveTask, onPinT
       </div>
     </div>
   );
-
 }
-Task.propTypes = {
-    /** Checks if it's in loading state */
-    loading: PropTypes.bool,
-    /** The list of tasks */
-    tasks: PropTypes.arrayOf(Task.propTypes.task).isRequired,
-    /** Event to change the task to pinned */
-    onPinTask: PropTypes.func,
-    /** Event to change the task to archived */
-    onArchiveTask: PropTypes.func,
-   };
-   Task.defaultProps = {
-   loading: false,
-   };
+
+ Task.propTypes = {
+      /** Composition of the task */
+      task: PropTypes.shape({
+        /** Id of the task */
+        id: PropTypes.string.isRequired,
+        /** Title of the task */
+        title: PropTypes.string.isRequired,
+        /** Current state of the task */
+        state: PropTypes.string.isRequired,
+      }),
+      /** Event to change the task to archived */
+      onArchiveTask: PropTypes.func,
+      /** Event to change the task to pinned */
+      onPinTask: PropTypes.func,
+     };
